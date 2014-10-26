@@ -26,24 +26,25 @@ class AskTypeController <  UIViewController
     NSLog("AskView.more_time clicked")
     @ask_view_controller = AskViewController.alloc.init
     @ask_view_controller.set_borrower(borrower)
+    @ask_view_controller.set_ask_type("more_time")
     @ask_view_controller.view.frame = UIScreen.mainScreen.bounds
     self.navigationController.pushViewController(@ask_view_controller, animated:'YES') 
   end
 
   def more_money(sender)
     NSLog("AskView.more_money clicked")
-    NSLog("AskView.more_time clicked")
     @ask_view_controller = AskViewController.alloc.init
     @ask_view_controller.set_borrower(borrower)
+    @ask_view_controller.set_ask_type("more_money")
     @ask_view_controller.view.frame = UIScreen.mainScreen.bounds
     self.navigationController.pushViewController(@ask_view_controller, animated:'YES') 
   end
 
   def call_now(sender)
     NSLog("AskView.call_now clicked")
-    NSLog("AskView.more_time clicked")
     @ask_view_controller = AskViewController.alloc.init
     @ask_view_controller.set_borrower(borrower)
+    @ask_view_controller.set_ask_type("call_now")
     @ask_view_controller.view.frame = UIScreen.mainScreen.bounds
     self.navigationController.pushViewController(@ask_view_controller, animated:'YES') 
   end

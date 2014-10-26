@@ -14,7 +14,8 @@ class ActiveAsks
     # @base_params = '?approval_status=requested&'
     # url = BASE_URL + @base_params  
     @asks = []
-    @users = [{username: "Lucky Ossai", email: "lo@now.com"}, {username: "Justin King", email: "jk@now.com"}]
+    @users = [{username: "Lucky Ossai", email: "lo@now.com"}, 
+              {username: "Justin King", email: "jk@now.com"}]
   end
     
   

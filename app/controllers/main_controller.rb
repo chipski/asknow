@@ -30,7 +30,7 @@ class MainController < UIViewController
     list_height = UIScreen.mainScreen.bounds.size.height-200
     top_frame = CGRectMake(0,0, width, 200)
     top_action_view = UIImageView.alloc.initWithFrame(top_frame)
-    top_action_view.image = "approval_responses.png".uiimage
+    top_action_view.image = "approval_responses5.png".uiimage
     self.view.addSubview top_action_view
     add_actions_button
     

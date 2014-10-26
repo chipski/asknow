@@ -24,6 +24,8 @@ Motion::Project::App.setup do |app|
   app.identifier = 'com.approvenow.asknow' 
   app.version = "1"
   app.short_version = "0.1.1"
+  app.codesign_certificate = "iPhone Developer: Chip Vanek (9AE6ZEAACG)"
+  app.provisioning_profile = "/Users/chip/Library/MobileDevice/Provisioning Profiles/803a1ce3-a5eb-45e1-9a8f-b2109bdba5fc.mobileprovision"
   
   app.development do
     # This entitlement is required during development but must not be used for release.
@@ -47,7 +49,7 @@ Motion::Project::App.setup do |app|
     '/usr/lib/libz.dylib',
     '/usr/lib/libsqlite3.dylib']
   
-  #app.fonts = ['fontawesome-webfont.ttf']
+  app.fonts = ['fontawesome-webfont.ttf']
   app.info_plist['UIStatusBarHidden'] = true
   app.info_plist['UIViewControllerBasedStatusBarAppearance'] = false
   

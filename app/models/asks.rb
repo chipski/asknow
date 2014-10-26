@@ -11,6 +11,10 @@ class Ask
     Ask.query.whereKey("requestor", equalTo:Ask.who_am_i).find
   end
 
+  def self.all
+    Ask.query.whereKey("requestor", equalTo:Ask.who_am_i).find
+  end
+  
   def label_text
     "#{ask_type} for #{borrower}"
   end
