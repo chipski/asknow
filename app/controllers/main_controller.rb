@@ -24,13 +24,45 @@ class MainController < UIViewController
     self.addChildViewController @ask_list_controller
     self.view.addSubview @ask_list_controller.view
   end
-
+  
   def init_user_list
+    width =       UIScreen.mainScreen.bounds.size.width
+    list_height = UIScreen.mainScreen.bounds.size.height-200
+    top_frame = CGRectMake(0,0, width, 200)
+    top_action_view = UIImageView.alloc.initWithFrame(top_frame)
+    top_action_view.image = "approval_responses.png".uiimage
+    self.view.addSubview top_action_view
+    add_actions_button
+    
     @list_controller = UINavigationController.alloc.initWithRootViewController(UserListController.alloc.init)
-    @list_controller.view.frame = UIScreen.mainScreen.bounds
+    # x, y, width, height
+    @list_controller.view.frame = CGRectMake(0,200, width, list_height)
     # @list_controller.delegate = self
     self.addChildViewController @list_controller
     self.view.addSubview @list_controller.view
+  end
+
+  def show_top_ask_response
+    NSLog("Main.show_top_ask_response") 
+    self.childViewControllers.each {|cont| cont.view.removeFromSuperview}
+    self.view.subviews.each{|view| view.removeFromSuperview}
+    @ask_view_controller = UINavigationController.alloc.initWithRootViewController(AskViewController.alloc.init)
+    @ask_view_controller.view.frame = UIScreen.mainScreen.bounds
+    self.addChildViewController @ask_view_controller
+    self.view.addSubview @ask_view_controller.view
+  end
+  
+  def add_actions_button(num_waiting=1)
+    MotionAwesome.button( :check_square, size: 48, text:"#{num_waiting}" ) do |button|
+      button.titleLabel.textColor = "#b6b6b6".uicolor(0.8)
+      button.titleLabel.font      = UIFont.fontWithName( 'Helvetica Neue', size:64 )
+      button.frame = CGRectMake((UIScreen.mainScreen.bounds.size.width/2)-90,70,180,64)
+      button.setShowsTouchWhenHighlighted true
+      button.addTarget( self, action: "show_top_ask_response",
+                        forControlEvents: UIControlEventTouchDown )
+      self.view.addSubview( button )
+    end
+    NSLog("Main.add_actions_button")    
   end
 
   def init_login
@@ -45,7 +77,7 @@ class MainController < UIViewController
   
   def logInViewController(logIn, didLogInUser:user)
     @login_controller.dismissModalViewControllerAnimated(true)
-    init_ask_list
+    init_user_list
   end
   
   def switch_to_ask_list

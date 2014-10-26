@@ -2,28 +2,18 @@ class AskViewController <  UIViewController
 
   def init
     super
+    @data = []
     self
   end
 
   def viewDidLoad
     super
-    self.backgroundColor = "#2e344a".uicolor
-    view.addSubview(build_button("Request More Time", "more_time", "#642EFE", 0))
-    view.addSubview(build_button("Request More Money", "more_money", "#FE642E", 0))
-    view.addSubview(build_button("Request Call Now", "call_now", "#04B404", 0))
+    build_button("Request More Time", "more_time", "#642EFE", 0)
+    build_button("Request More Money", "more_money", "#FE642E", 0)
+    build_button("Request Call Now", "call_now", "#04B404", 0)
+    
   end
 
-  def more_time(sender)
-    NSLog("AskView.more_time clicked")
-  end
-
-  def more_money(sender)
-    NSLog("AskView.more_money clicked")
-  end
-
-  def call_now(sender)
-    NSLog("AskView.call_now clicked")
-  end
 
   def build_button(title, action, backcolor="#b6b6b6", index=0)
     button = UIButton.buttonWithType(UIButtonTypeRoundedRect)

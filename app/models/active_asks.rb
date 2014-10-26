@@ -14,11 +14,11 @@ class ActiveAsks
     # @base_params = '?approval_status=requested&'
     # url = BASE_URL + @base_params  
     @asks = []
-    @users = []
+    @users = [{username: "Lucky Ossai", email: "lo@now.com"}, {username: "Justin King", email: "jk@now.com"}]
   end
     
   
-  def get_open_asks(query)
+  def get_open_asks(query={})
     @asks ||= []
     Ask.all.entries do |new_ask|
       NSLog("ActiveAsks.get_open_asks ask_info= #{new_ask.inspect}")
@@ -30,10 +30,10 @@ class ActiveAsks
 
   def get_users(filter={})
     @users ||= []
-    # User.all_borrowers.entries do |new_ask|
-    #   NSLog("ActiveAsks.get_open_asks ask_info= #{new_ask.inspect}")
-    #   @users << new_ask
-    # end
+    User.all_borrowers.entries do |pf_user|
+      NSLog("ActiveAsks.get_open_asks ask_info= #{new_ask.inspect}")
+      @users << {username: pf_user.objectForKey("username"), email: pf_user.objectForKey("email")}
+    end
     NSNotificationCenter.defaultCenter.postNotificationName(USERS_FETCHED, object:nil)
     @users
   end  

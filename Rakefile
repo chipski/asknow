@@ -50,9 +50,10 @@ Motion::Project::App.setup do |app|
   #app.fonts = ['fontawesome-webfont.ttf']
   app.info_plist['UIStatusBarHidden'] = true
   app.info_plist['UIViewControllerBasedStatusBarAppearance'] = false
-
-  app.vendor_project('vendor/Parse.framework', :static,
-    :products => ['Parse'],
+  
+  app.vendor_project('vendor/Bolts.framework', :static, :force_load => true, :products => ['Bolts'], :headers_dir => 'Headers')
+    
+  app.vendor_project('vendor/Parse.framework', :static, :force_load => true, :products => ['Parse'],
     :headers_dir => 'Headers')
       
   app.pods do
