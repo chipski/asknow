@@ -4,12 +4,8 @@ class AskViewController <  UIViewController
   
   def viewDidLoad
     super
-    #self.title = "Loan Request"
-    @ask_create_view = AskCreateView.new(view)
-    #@ask_create_view.target = self
-    @ask_create_view.delegate = self
+
     @photo_height = Device.screen.height/2.5
-    view.addSubview @ask_create_view
     
     image_frame =CGRectMake(0,Device.screen.height-@photo_height, Device.screen.width, @photo_height)
     @image_view = UIImageView.alloc.initWithFrame(image_frame)
@@ -31,8 +27,14 @@ class AskViewController <  UIViewController
       view.addSubview( button )
     end
   end
-  
-  
+
+  def add_detail_view(ask_type="new")  
+    @ask_create_view = AskCreateView.new(view, ask_type)
+    #@ask_create_view.target = self
+    @ask_create_view.delegate = self
+    view.addSubview @ask_create_view
+
+  end
 
   def set_borrower(borrower)
     @borrower = borrower
@@ -42,8 +44,7 @@ class AskViewController <  UIViewController
 
   def set_ask_type(ask_type)
     @ask_type = ask_type
-    #self.childViewControllers.last.set_ask_type(ask_type)
-    #self.title = ask_type
+    add_detail_view(ask_type)
     NSLog("AskView.set_borrower #{ask_type}")
   end
     

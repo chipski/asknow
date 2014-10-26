@@ -3,16 +3,22 @@ class AskCreateView < UIView
   attr_accessor :target
   attr_accessor :delegate
   
-  def initialize(parent_view)
+  def initialize(parent_view, ask_type)
     initWithFrame(parent_view.bounds).tap do
       self.backgroundColor =  "#2e344a".uicolor #:clear.uicolor
-                
-      set_ask_type("more_money")
+      
+      NSLog("AskCreateView.initialize ask_type=#{ask_type}")
+               
+      set_ask_type(ask_type)
       #set_ask_type("extend_time")
       #set_ask_type("call")
 
       addSubview(build_button("Send Request", "send_request:", "#04B404", 4))
     end
+  end
+
+  def viewDidLoad
+    super
   end
   
   def set_ask_type(ask_type)

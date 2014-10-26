@@ -26,7 +26,7 @@ class AskTypeController <  UIViewController
     NSLog("AskView.more_time clicked")
     @ask_view_controller = AskViewController.alloc.init
     @ask_view_controller.set_borrower(borrower)
-    @ask_view_controller.set_ask_type("more_time")
+    @ask_view_controller.set_ask_type("extend_time")
     @ask_view_controller.view.frame = UIScreen.mainScreen.bounds
     self.navigationController.pushViewController(@ask_view_controller, animated:'YES') 
   end
