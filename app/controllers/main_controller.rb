@@ -34,7 +34,7 @@ class MainController < UIViewController
     self.view.addSubview top_action_view
     add_actions_button
     
-    @list_controller = UINavigationController.alloc.initWithRootViewController(UserListController.alloc.init)
+    @list_controller = UserListController.alloc.init
     # x, y, width, height
     @list_controller.view.frame = CGRectMake(0,200, width, list_height)
     # @list_controller.delegate = self
@@ -44,12 +44,17 @@ class MainController < UIViewController
 
   def show_top_ask_response
     NSLog("Main.show_top_ask_response") 
-    self.childViewControllers.each {|cont| cont.view.removeFromSuperview}
-    self.view.subviews.each{|view| view.removeFromSuperview}
-    @ask_view_controller = UINavigationController.alloc.initWithRootViewController(AskViewController.alloc.init)
+    @ask_view_controller = AskViewController.alloc.init
     @ask_view_controller.view.frame = UIScreen.mainScreen.bounds
-    self.addChildViewController @ask_view_controller
-    self.view.addSubview @ask_view_controller.view
+    @ask_view_controller.delegate = self
+    self.navigationController.pushViewController(@ask_view_controller, animated:'YES')
+    # self.childViewControllers.each {|cont| cont.view.removeFromSuperview}
+    # self.view.subviews.each{|view| view.removeFromSuperview}
+    #self.presentViewController(@ask_view_controller, animated:true, completion:nil)
+  end
+  
+  def completed_ask_response
+    
   end
   
   def add_actions_button(num_waiting=1)

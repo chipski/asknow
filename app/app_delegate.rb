@@ -3,7 +3,9 @@ class AppDelegate
     app_frame = UIScreen.mainScreen.bounds
     @window = UIWindow.alloc.initWithFrame(app_frame)
     loadWithParse
-    @window.rootViewController = MainController.alloc.init
+    @window.rootViewController = UINavigationController.alloc.initWithRootViewController(MainController.alloc.init)
+    #@window.rootViewController.wantsFullScreenLayout = true
+    
     splash_view = UIImageView.alloc.initWithImage(UIImage.imageNamed(get_right_splash_image))
     @window.rootViewController.view.addSubview(splash_view)
     @window.rootViewController.view.bringSubviewToFront(splash_view)

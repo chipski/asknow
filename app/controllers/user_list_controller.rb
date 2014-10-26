@@ -83,7 +83,20 @@ class UserListController < UITableViewController
   end
 
   def tableView(tableView, didSelectRowAtIndexPath: indexPath)
-    switch_to_app(indexPath)
+    #switch_to_app(indexPath)
+    pop_ask_type(indexPath)
+  end
+
+  def pop_ask_type(indexPath)
+    borrower = @data[indexPath.row]
+    NSLog("Main.pop_ask_type") 
+    @ask_type_controller = AskTypeController.alloc.init
+    @ask_type_controller.set_borrower(borrower)
+    @ask_type_controller.view.frame = UIScreen.mainScreen.bounds
+    #@ask_type_controller.delegate = self
+    self.navigationController.pushViewController(@ask_type_controller, animated:'YES') 
+    #self.view.bringSubviewToFront(@ask_type_controller.view)   
+    
   end
 
   def switch_to_app(indexPath)

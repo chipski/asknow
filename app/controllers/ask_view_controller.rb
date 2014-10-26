@@ -1,18 +1,26 @@
 class AskViewController <  UIViewController
-
-  def init
-    super
-    self
-  end
-
+  #attr_accessor :delegate
+  
   def viewDidLoad
     super
-    self.backgroundColor = "#2e344a".uicolor
-    view.addSubview(build_button("Request More Time", "more_time", "#642EFE", 0))
-    view.addSubview(build_button("Request More Money", "more_money", "#FE642E", 0))
-    view.addSubview(build_button("Request Call Now", "call_now", "#04B404", 0))
+    #self.title = "Loan Request"
+    @ask_create_view = AskCreateView.new(view)
+    @ask_create_view.target = self
+    view.addSubview @ask_create_view
+    
+    # top_action_view = UIImageView.alloc.initWithFrame(UIScreen.mainScreen.bounds)
+    # top_action_view.image = "approval_responses.png".uiimage
+    # view.addSubview top_action_view
+    
+    
   end
 
+  def set_borrower(borrower)
+    @borrower = borrower
+    self.title = borrower[:username]
+    NSLog("AskView.set_borrower #{borrower}")
+  end
+  
   def more_time(sender)
     NSLog("AskView.more_time clicked")
   end
@@ -25,18 +33,5 @@ class AskViewController <  UIViewController
     NSLog("AskView.call_now clicked")
   end
 
-  def build_button(title, action, backcolor="#b6b6b6", index=0)
-    button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
-    button.setTitle(title, forState: UIControlStateNormal)
-    button.setTitleColor "#ccc".uicolor, forState: UIControlStateNormal
-    button.setTitleColor :white.uicolor, forState: UIControlStateHighlighted
-    button.setFont UIFont.fontWithName('Helvetica Neue', size: 48)
-    button.setContentHorizontalAlignment UIControlContentHorizontalAlignmentLeft
-    button.setShowsTouchWhenHighlighted true
-    button_height = UIScreen.mainScreen.bounds.size.height/3
-    button.frame = [[0, button_height*index], [UIScreen.mainScreen.bounds.size.width, button_height]]
-    button.addTarget(self, action: "#{action}:", forControlEvents: UIControlEventTouchUpInside)
-    button
-  end
 
 end

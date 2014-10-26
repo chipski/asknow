@@ -1,32 +1,51 @@
-class AskViewController <  UIViewController
+class AskTypeController <  UIViewController
+  attr_accessor :delegate, :borrower
 
   def init
     super
-    @data = []
+    
     self
+  end
+  
+  def set_borrower(borrower)
+    @borrower = borrower
+    self.title = borrower[:username]
+    NSLog("AskType.set_borrower #{borrower}")
   end
 
   def viewDidLoad
     super
-    build_button("Request More Time", "more_time", "#642EFE", 0)
-    build_button("Request More Money", "more_money", "#FE642E", 0)
-    build_button("Request Call Now", "call_now", "#04B404", 0)
-    
+    #self.title = "Ask Type"
+    @ask_type_view = AskTypeView.new(view)
+    @ask_type_view.target = self
+    #@ask_type_view.delegate = self
+    view.addSubview @ask_type_view
+  end
+  
+  def more_time(sender)
+    NSLog("AskView.more_time clicked")
+    @ask_view_controller = AskViewController.alloc.init
+    @ask_view_controller.set_borrower(borrower)
+    @ask_view_controller.view.frame = UIScreen.mainScreen.bounds
+    self.navigationController.pushViewController(@ask_view_controller, animated:'YES') 
   end
 
+  def more_money(sender)
+    NSLog("AskView.more_money clicked")
+    NSLog("AskView.more_time clicked")
+    @ask_view_controller = AskViewController.alloc.init
+    @ask_view_controller.set_borrower(borrower)
+    @ask_view_controller.view.frame = UIScreen.mainScreen.bounds
+    self.navigationController.pushViewController(@ask_view_controller, animated:'YES') 
+  end
 
-  def build_button(title, action, backcolor="#b6b6b6", index=0)
-    button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
-    button.setTitle(title, forState: UIControlStateNormal)
-    button.setTitleColor "#ccc".uicolor, forState: UIControlStateNormal
-    button.setTitleColor :white.uicolor, forState: UIControlStateHighlighted
-    button.setFont UIFont.fontWithName('Helvetica Neue', size: 48)
-    button.setContentHorizontalAlignment UIControlContentHorizontalAlignmentLeft
-    button.setShowsTouchWhenHighlighted true
-    button_height = UIScreen.mainScreen.bounds.size.height/3
-    button.frame = [[0, button_height*index], [UIScreen.mainScreen.bounds.size.width, button_height]]
-    button.addTarget(self, action: "#{action}:", forControlEvents: UIControlEventTouchUpInside)
-    button
+  def call_now(sender)
+    NSLog("AskView.call_now clicked")
+    NSLog("AskView.more_time clicked")
+    @ask_view_controller = AskViewController.alloc.init
+    @ask_view_controller.set_borrower(borrower)
+    @ask_view_controller.view.frame = UIScreen.mainScreen.bounds
+    self.navigationController.pushViewController(@ask_view_controller, animated:'YES') 
   end
 
 end
