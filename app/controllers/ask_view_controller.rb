@@ -6,7 +6,11 @@ class AskViewController <  UIViewController
     super
 
     @photo_height = Device.screen.height/2.5
+    borrower = "Unknown Borrower"
     
+  end
+  
+  def add_photo_block
     image_frame =CGRectMake(0,Device.screen.height-@photo_height, Device.screen.width, @photo_height)
     @image_view = UIImageView.alloc.initWithFrame(image_frame)
     @image_view.image = "approval_responses5.png".uiimage
@@ -45,7 +49,8 @@ class AskViewController <  UIViewController
   def set_ask_type(ask_type)
     @ask_type = ask_type
     add_detail_view(ask_type)
-    NSLog("AskView.set_borrower #{ask_type}")
+    add_photo_block
+    NSLog("AskView.set_ask_type #{ask_type}")
   end
     
   def more_time(sender)

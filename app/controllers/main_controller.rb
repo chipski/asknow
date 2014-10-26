@@ -44,7 +44,8 @@ class MainController < UIViewController
 
   def show_top_ask_response
     NSLog("Main.show_top_ask_response") 
-    @ask_view_controller = AskViewController.alloc.init
+    @ask_view_controller = AskApproveController.alloc.init
+    @ask_view_controller.set_ask_type("approver")
     @ask_view_controller.view.frame = UIScreen.mainScreen.bounds
     @ask_view_controller.delegate = self
     self.navigationController.pushViewController(@ask_view_controller, animated:'YES')

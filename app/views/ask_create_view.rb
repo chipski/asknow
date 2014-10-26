@@ -31,6 +31,8 @@ class AskCreateView < UIView
       time_slider
       message_field
       #addSubview(build_button("Send Request", "send_request:", "#04B404", 4))
+    elsif ask_type == "approver"
+      
     else
       show_number
     end
